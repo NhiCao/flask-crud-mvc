@@ -51,6 +51,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
+        flask db upgrade
         python -m unittest tests/test_2.py
 
   deploy:
