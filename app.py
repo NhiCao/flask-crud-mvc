@@ -35,8 +35,6 @@ from app import create_app, db
 
 app = create_app()
 
-migrate = Migrate(app, db)
-
 app.register_blueprint(user_bp, url_prefix='/users')
 
 @app.route('/')
