@@ -52,7 +52,7 @@ jobs:
     - name: Test with unittest
       run: |
         flask db upgrade
-        python -m unittest tests/test_2.py
+        # python -m unittest tests/test_2.py
 
   deploy:
     if: github.ref == 'refs/heads/develop'
