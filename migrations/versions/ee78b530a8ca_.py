@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-    passop.create_table('user',
+    op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('age', sa.String(length=120), nullable=False),
