@@ -1,11 +1,13 @@
 import unittest
+import config
+
 from app.models.user import User
 from app.services import user_service
 from app import create_app, db
 
 class TestUser(unittest.TestCase):
     def setUp(self):
-        self.app = create_app()
+        self.app = create_app(config.TestingConfig)
 
         User.query.delete()
 
