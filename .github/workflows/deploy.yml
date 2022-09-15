@@ -51,13 +51,13 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
-        # flask db init
-        # flask db migrate
-        # flask db upgrade
-        # python -m unittest tests/test_2.py
+        flask db init
+        flask db migrate
+        flask db upgrade
+        python -m unittest tests/test_2.py
 
   deploy:
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop1'
     runs-on: ubuntu-latest
     steps:
     - name: Login
