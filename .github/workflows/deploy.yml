@@ -12,6 +12,7 @@ env:
   GAR_HOSTNAME: us-central1-docker.pkg.dev
   GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
   GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+  FLASK_APP: TESTING
   # nhi1
 
 jobs:

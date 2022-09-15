@@ -68,7 +68,6 @@ import os
 import config
 
 from flask import render_template
-from flask_migrate import Migrate
 
 from app.routes.user_bp import user_bp
 from app import create_app
