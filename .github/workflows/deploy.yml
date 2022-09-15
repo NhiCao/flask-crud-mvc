@@ -60,7 +60,7 @@ jobs:
         python -m unittest tests/test_2.py
 
   deploy:
-    if: github.ref == 'refs/heads/develop1'
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
     - name: Login
