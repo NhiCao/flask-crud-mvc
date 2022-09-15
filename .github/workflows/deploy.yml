@@ -80,6 +80,7 @@ jobs:
 
     - name: Build Docker image
       run: |
+        echo "$FLASK_ENV"
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
         docker build . -t $IMAGE_NAME
 
