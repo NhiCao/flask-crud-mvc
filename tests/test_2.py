@@ -20,6 +20,7 @@ class TestUser(unittest.TestCase):
         with self.app.app_context():
             users = user_service.get_all_users()
             users_retrieved = User.query.all()
+            self.assertEqual(len(users), 2)
             self.assertEqual(users, users_retrieved)
 
 if __name__ == '__main__':
