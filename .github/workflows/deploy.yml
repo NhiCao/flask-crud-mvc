@@ -12,12 +12,14 @@ env:
   GAR_HOSTNAME: us-central1-docker.pkg.dev
   GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
   GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
-  FLASK_ENV: TESTING
   # nhi1
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    env:
+      FLASK_ENV: TESTING
+      FLASK_APP: app1.py
     services:
       postgres:
         image: postgres:latest
