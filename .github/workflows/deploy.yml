@@ -92,4 +92,4 @@ jobs:
     - name: Deploy Docker image
       run: |
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        gcloud run deploy ${{ secrets.GCP_APP_NAME }} --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated
+        gcloud run deploy ${{ secrets.GCP_APP_NAME }} --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=PRODUCTION"
