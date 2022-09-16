@@ -83,6 +83,8 @@ elif environ == 'LOCAL':
     config_app = config.LocalConfig
 
 app = create_app(config_app)
+print(environ)
+print("------------------")
 
 app.register_blueprint(user_bp, url_prefix='/users')
 
