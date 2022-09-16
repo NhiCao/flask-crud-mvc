@@ -11,7 +11,6 @@ def create_app(config):
     app.config.from_object(config)
 
     from app.models import user
-    # from app import models
 
     db.init_app(app)
     migrate.init_app(app, db)
