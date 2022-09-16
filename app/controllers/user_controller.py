@@ -8,7 +8,8 @@ db = SQLAlchemy()
 
 def index():
     # return str(user_service.get_all_users())
-    return render_template('user_list.html')
+    users = user_service.get_all_users()
+    return render_template('user_list.html', user_list = users)
 
 def save():
     pass
