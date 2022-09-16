@@ -22,21 +22,11 @@
         </thead> -->
         <tbody>
             {% for user in user_list %}
-            <tr>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <td>{{ user.name }}</td>
-                    </div>
-                    <div class="col-sm-2">
-                        <td>{{ user.age }}</td>
-                    </div>
-                    <div class="col-sm-2">
-                        <td>{{ user.address }}</td>
-                    </div>
-                    <div class="col-sm-6">
-                        
-                    </div>
-                </div>
+            <tr class="row">
+                <td class="col-sm-2">{{ user.name }}</td>
+                <td class="col-sm-2">{{ user.age }}</td>
+                <td class="col-sm-2">{{ user.address }}</td>
+                <td class="col-sm-6">{{ user.name }}</td>
             </tr>
             {% endfor %}
         </tbody>
