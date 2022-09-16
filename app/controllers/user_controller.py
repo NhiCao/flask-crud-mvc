@@ -9,6 +9,7 @@ db = SQLAlchemy()
 def index():
     # return str(user_service.get_all_users())
     users = user_service.get_all_users()
+    print(users)
     return render_template('user_list.html', user_list = users)
 
 def save():
