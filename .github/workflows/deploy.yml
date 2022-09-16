@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FLASK_ENV: TESTING
-      FLASK_APP: app.py
+      FLASK_APP: app1.py
     services:
       postgres:
         image: postgres:latest
@@ -60,7 +60,7 @@ jobs:
         python -m unittest tests/test_user_service.py
 
   deploy:
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop1'
     runs-on: ubuntu-latest
     steps:
     - name: Login
