@@ -13,20 +13,21 @@
 <body>
         
     <table class="table">
-        <!-- <thead>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Address</th>
+        <thead>
+            <tr class="row">
+                <td class="col-sm-2">Name</td>
+                <td class="col-sm-2">Age</td>
+                <td class="col-sm-2">Address</td>
+                <td class="col-sm-6"></td>
             </tr>
-        </thead> -->
+        </thead>
         <tbody>
             {% for user in user_list %}
             <tr class="row">
                 <td class="col-sm-2">{{ user.name }}</td>
                 <td class="col-sm-2">{{ user.age }}</td>
                 <td class="col-sm-2">{{ user.address }}</td>
-                <td class="col-sm-6">{{ user.name }}</td>
+                <td class="col-sm-6"></td>
             </tr>
             {% endfor %}
         </tbody>
