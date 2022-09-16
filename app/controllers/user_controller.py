@@ -7,7 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 def index():
-    return str(user_service.get_all_users())
+    # return str(user_service.get_all_users())
+    return render_template('user_list.html')
 
 def save():
     pass
