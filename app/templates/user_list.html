@@ -12,24 +12,31 @@
 
 <body>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Address</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in user_list %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.age }}</td>
-                <td>{{ user.address }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>;    
+    <div class="row">
+        <div class="col-sm-8"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in user_list %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        .col-sm-4
+    </div>
 
 </body>
 
