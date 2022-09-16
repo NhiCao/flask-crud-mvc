@@ -11,33 +11,36 @@
 </head>
 
 <body>
-
-    <div class="row">
-        <div class="col-sm-8"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in user_list %}
-                    <tr>
+        
+    <table class="table">
+        <!-- <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            {% for user in user_list %}
+            <tr>
+                <div class="row">
+                    <div class="col-sm-3">
                         <td>{{ user.name }}</td>
+                    </div>
+                    <div class="col-sm-3">
                         <td>{{ user.age }}</td>
+                    </div>
+                    <div class="col-sm-3">
                         <td>{{ user.address }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    
-        <div class="col-sm-4">
-            .col-sm-4
-        </div>
-    </div>
+                    </div>
+                    <div class="col-sm-3">
+                        
+                    </div>
+                </div>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 </body>
 
