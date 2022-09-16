@@ -60,7 +60,7 @@ jobs:
         python -m unittest tests/test_user_service.py
 
   deploy:
-    if: github.ref == 'refs/heads/develop1'
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
     - name: Login
@@ -78,7 +78,6 @@ jobs:
 
     - name: Build Docker image
       run: |
-        echo "$FLASK_ENV"
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
         docker build . -t $IMAGE_NAME
 

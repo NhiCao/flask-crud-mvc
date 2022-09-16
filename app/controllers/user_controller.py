@@ -1,4 +1,3 @@
-import sys
 from flask import render_template, redirect, url_for, request, abort
 from app.services import user_service
 
