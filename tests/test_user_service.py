@@ -22,12 +22,12 @@ class TestUser(unittest.TestCase):
             config_app = config.ProductionConfig
 
         self.app = create_app(config.LocalConfig)
-        # with self.app.app_context():
-        #     user1 = User(id='1', name='Nguyen Thi GitHub Actions Test 1 - ' + environ, age='22', address='39 Tran Nhan Tong')
-        #     user2 = User(id='2', name='Tran Thi GitHub Actions Test 2 - ' + environ, age='22', address='56 Pham Phu Thu')
-        #     db.session.add(user1)
-        #     db.session.add(user2)
-        #     db.session.commit()
+        with self.app.app_context():
+            user1 = User(id='1', name='Nguyen Thi GitHub Actions Test 1 - ' + environ, age='22', address='39 Tran Nhan Tong')
+            user2 = User(id='2', name='Tran Thi GitHub Actions Test 2 - ' + environ, age='22', address='56 Pham Phu Thu')
+            db.session.add(user1)
+            db.session.add(user2)
+            db.session.commit()
     
     def tearDown(self):
         with self.app.app_context():
