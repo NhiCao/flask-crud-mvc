@@ -31,8 +31,8 @@ class TestUser(unittest.TestCase):
     
     def tearDown(self):
         with self.app.app_context():
-            print('tear downnnnnnnn')
-            User.query().delete()
+            db.session.query(User).delete()
+            db.session.commit()
 
     def test_get_all_users(self):
         # self.assertEqual(3, 3)
