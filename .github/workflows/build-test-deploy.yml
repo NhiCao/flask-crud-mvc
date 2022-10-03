@@ -46,14 +46,17 @@ jobs:
         then
           # echo "::set-output name=environment::LOCAL"
           export FLASK_ENV=LOCAL
+          echo $FLASK_ENV
         elif [[ "$GITHUB_REF_NAME" == "develop" ]]
         then
           # echo "::set-output name=environment::DEVELOPMENT"
           export FLASK_ENV=DEVELOPMENT
+          echo $FLASK_ENV
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
           # echo "::set-output name=environment::STAGING"
           export FLASK_ENV=STAGING
+          echo $FLASK_ENV
         fi
 
 
