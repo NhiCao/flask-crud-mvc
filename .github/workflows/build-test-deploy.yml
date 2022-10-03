@@ -81,58 +81,58 @@ jobs:
         flask db upgrade
         python -m unittest tests/test_user_service.py
 
-  deploy:
-    if: github.ref_name == 'develop' || github.ref_name == 'staging' || github.ref_name == 'master'
-    runs-on: ubuntu-latest
-    env:
-      GAR_HOSTNAME: us-central1-docker.pkg.dev
-      GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
-      GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
-    steps:
-    - name: check-environment
-      id: check_env
-      run: |
-        if [[ "$GITHUB_REF_NAME" == "feature/"* ]]
-        then
-          # echo "::set-output name=environment::LOCAL"
-          echo "FLASK_ENV=LOCAL" >> $GITHUB_ENV
-          echo "Hi $FLASK_ENV"
-        elif [[ "$GITHUB_REF_NAME" == "develop" ]]
-        then
-          # echo "::set-output name=environment::DEVELOPMENT"
-          echo "FLASK_ENV=DEVELOPMENT" >> $GITHUB_ENV
-          echo "Hi $FLASK_ENV"
-        elif [[ "$GITHUB_REF_NAME" == "staging" ]]
-        then
-          # echo "::set-output name=environment::STAGING"
-          echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
-          echo "Hi $FLASK_ENV"
-        fi
-    - name: Login
-      uses: google-github-actions/setup-gcloud@v0
-      with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_email: ${{ secrets.GCP_EMAIL }}
-        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+  # deploy:
+  #   if: github.ref_name == 'develop' || github.ref_name == 'staging' || github.ref_name == 'master'
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     GAR_HOSTNAME: us-central1-docker.pkg.dev
+  #     GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
+  #     GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+  #   steps:
+  #   - name: check-environment
+  #     id: check_env
+  #     run: |
+  #       if [[ "$GITHUB_REF_NAME" == "feature/"* ]]
+  #       then
+  #         # echo "::set-output name=environment::LOCAL"
+  #         echo "FLASK_ENV=LOCAL" >> $GITHUB_ENV
+  #         echo "Hi $FLASK_ENV"
+  #       elif [[ "$GITHUB_REF_NAME" == "develop" ]]
+  #       then
+  #         # echo "::set-output name=environment::DEVELOPMENT"
+  #         echo "FLASK_ENV=DEVELOPMENT" >> $GITHUB_ENV
+  #         echo "Hi $FLASK_ENV"
+  #       elif [[ "$GITHUB_REF_NAME" == "staging" ]]
+  #       then
+  #         # echo "::set-output name=environment::STAGING"
+  #         echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
+  #         echo "Hi $FLASK_ENV"
+  #       fi
+  #   - name: Login
+  #     uses: google-github-actions/setup-gcloud@v0
+  #     with:
+  #       project_id: ${{ secrets.GCP_PROJECT_ID }}
+  #       service_account_email: ${{ secrets.GCP_EMAIL }}
+  #       service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
-    - name: Configure Docker
-      run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
+  #   - name: Configure Docker
+  #     run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
 
-    - name: Checkout repository
-      uses: actions/checkout@v3
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v3
 
-    - name: Build Docker image
-      run: |
-        IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        docker build . -t $IMAGE_NAME
+  #   - name: Build Docker image
+  #     run: |
+  #       IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+  #       docker build . -t $IMAGE_NAME
 
-    - name: Push Docker image
-      run: |
-        IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        docker push $IMAGE_NAME
+  #   - name: Push Docker image
+  #     run: |
+  #       IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+  #       docker push $IMAGE_NAME
 
-    - name: Deploy Docker image
-      run: |
-        IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-$FLASK_ENV"
-        gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
+  #   - name: Deploy Docker image
+  #     run: |
+  #       IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+  #       GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-$FLASK_ENV"
+  #       gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
