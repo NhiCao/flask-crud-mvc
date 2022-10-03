@@ -23,8 +23,8 @@ class TestUser(unittest.TestCase):
 
         self.app = create_app(config.LocalConfig)
         with self.app.app_context():
-            user1 = User(id='1', name='Nguyen Thi GitHub Actions Test 1 - ' + environ, age='22', address='39 Tran Nhan Tong')
-            user2 = User(id='2', name='Nguyen Thi GitHub Actions Test 2 - ' + environ, age='22', address='56 Pham Phu Thu')
+            user1 = User(id='1', name='Nguyen Thi GitHub Actions Test 1 - ' + str(environ), age='22', address='39 Tran Nhan Tong')
+            user2 = User(id='2', name='Nguyen Thi GitHub Actions Test 2 - ' + str(environ), age='22', address='56 Pham Phu Thu')
             db.session.add(user1)
             db.session.add(user2)
             db.session.commit()
