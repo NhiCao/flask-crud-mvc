@@ -21,7 +21,7 @@ jobs:
     if: startsWith(github.ref_name, 'feature/') || github.ref_name == 'develop' || github.ref_name == 'staging'
     runs-on: ubuntu-latest
     env:
-      FLASK_ENV: ${{ steps.check_env.outputs.env_name }}
+      FLASK_ENV: LOCAL
       FLASK_APP: main.py
     services:
       postgres:
@@ -44,13 +44,16 @@ jobs:
       run: |
         if [[ "$GITHUB_REF_NAME" == "feature/"* ]]
         then
-          echo "::set-output name=environment::LOCAL"
+          # echo "::set-output name=environment::LOCAL"
+          export FLASK_ENV=LOCAL
         elif [[ "$GITHUB_REF_NAME" == "develop" ]]
         then
-          echo "::set-output name=environment::DEVELOPMENT"
+          # echo "::set-output name=environment::DEVELOPMENT"
+          export FLASK_ENV=DEVELOPMENT
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
-          echo "::set-output name=environment::STAGING"
+          # echo "::set-output name=environment::STAGING"
+          export FLASK_ENV=STAGING
         fi
 
 
