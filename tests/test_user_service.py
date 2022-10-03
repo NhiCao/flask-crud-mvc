@@ -30,7 +30,8 @@ class TestUser(unittest.TestCase):
         #     db.session.commit()
     
     def tearDown(self):
-        User.query.delete()
+        with self.app.app_context():
+            User.query.delete()
 
     def test_get_all_users(self):
         with self.app.app_context():
