@@ -75,12 +75,15 @@ from app import create_app
 environ = os.environ.get('FLASK_ENV')
 
 config_app = config.LocalConfig
-if environ == 'PRODUCTION':
-    config_app = config.ProductionConfig
-elif environ == 'TESTING':
-    config_app = config.TestingConfig
-elif environ == 'LOCAL':
+
+if environ == 'LOCAL':
     config_app = config.LocalConfig
+elif environ == 'DEVELOPMENT':
+    config_app = config.DevelopmentConfig
+elif environ == 'STAGING':
+    config_app = config.StagingConfig
+elif environ == 'PRODUCTION':
+    config_app = config.ProductionConfig
 
 app = create_app(config_app)
 print("\n------------------------")

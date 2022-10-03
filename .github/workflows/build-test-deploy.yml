@@ -5,6 +5,8 @@ on:
     branches:
       - 'feature/**'
       - 'develop'
+      - 'staging'
+      - 'master'
   # pull_request:
   #   branches: [master]
 
@@ -16,9 +18,10 @@ on:
 
 jobs:
   build-test:
+    if: startsWith(github.ref_name, 'feature/')
     runs-on: ubuntu-latest
     env:
-      FLASK_ENV: TESTING
+      FLASK_ENV: LOCAL
       FLASK_APP: main.py
     services:
       postgres:
@@ -36,6 +39,14 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+    # - name: check-environment
+    #   id: check_env
+    #   echo "branch name is $BRANCH_NAME"
+    #   if github.ref == 'refs/heads/develop':
+      
+
+
+
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -60,7 +71,7 @@ jobs:
         python -m unittest tests/test_user_service.py
 
   deploy:
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref_name == 'develop'
     runs-on: ubuntu-latest
     env:
       GAR_HOSTNAME: us-central1-docker.pkg.dev
