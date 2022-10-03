@@ -34,7 +34,7 @@ class TestUser(unittest.TestCase):
             User.query.delete()
 
     def test_get_all_users(self):
-        self.assertEqual(2, 2)
+        self.assertEqual(3, 3)
         # with self.app.app_context():
         #     users = user_service.get_all_users()
         #     users_retrieved = User.query.all()
