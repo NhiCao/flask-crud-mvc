@@ -77,7 +77,7 @@ jobs:
     - name: Test with unittest
       run: |
         flask db init
-        # flask db migrate
+        flask db migrate
         # flask db upgrade
         python -m unittest tests/test_user_service.py
 
