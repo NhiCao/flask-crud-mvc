@@ -81,9 +81,9 @@ jobs:
     - name: Test with unittest
       run: |
         flask db init
-        # flask db migrate
-        # flask db upgrade
-        # python -m unittest tests/test_user_service.py
+        flask db migrate
+        flask db upgrade
+        python -m unittest tests/test_user_service.py
 
   # deploy:
   #   if: github.ref_name == 'develop' || github.ref_name == 'staging' || github.ref_name == 'master'
