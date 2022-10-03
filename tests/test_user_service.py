@@ -32,7 +32,7 @@ class TestUser(unittest.TestCase):
     def tearDown(self):
         with self.app.app_context():
             print('tear downnnnnnnn')
-            User.query.delete()
+            User.query().delete()
 
     def test_get_all_users(self):
         # self.assertEqual(3, 3)
