@@ -18,7 +18,7 @@ on:
 
 jobs:
   build-test:
-    if: startsWith(github.ref_name, 'feature/')
+    if: startsWith(github.ref_name, 'feature/') || github.ref_name == 'develop' || github.ref_name == 'staging'
     runs-on: ubuntu-latest
     env:
       FLASK_ENV: LOCAL
@@ -71,7 +71,7 @@ jobs:
         python -m unittest tests/test_user_service.py
 
   deploy:
-    if: github.ref_name == 'develop'
+    if: github.ref_name == 'develop' || github.ref_name == 'stating' || github.ref_name == 'master'
     runs-on: ubuntu-latest
     env:
       GAR_HOSTNAME: us-central1-docker.pkg.dev
