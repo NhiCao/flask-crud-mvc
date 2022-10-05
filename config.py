@@ -65,13 +65,26 @@ class DevelopmentConfig(Config):
         host=DB_HOST,
         db=DB_NAME
     )
+    print("\n----------DB_NAME--------------")
+    print(DB_NAME)
+    print("------------------------\n")
 
 
 class StagingConfig(Config):
-    DB_USER_NAME = 'lzsbhvfdiqzkyv'
-    DB_USER_PWD = '9c517c53a9168b8c18eb857d5a16a52ebb3ebbedaa9e4fd03ba44fdb05cec147'
-    DB_HOST = 'ec2-34-235-31-124.compute-1.amazonaws.com'
-    DB_NAME = 'df9d8fakntg936'
+    # DB_USER_NAME = 'lzsbhvfdiqzkyv'
+    # DB_USER_PWD = '9c517c53a9168b8c18eb857d5a16a52ebb3ebbedaa9e4fd03ba44fdb05cec147'
+    # DB_HOST = 'ec2-34-235-31-124.compute-1.amazonaws.com'
+    # DB_NAME = 'df9d8fakntg936'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://{username}:{password}@{host}/{db}'.format(
+    #     username=DB_USER_NAME,
+    #     password=DB_USER_PWD,
+    #     host=DB_HOST,
+    #     db=DB_NAME
+    # )
+    DB_USER_NAME = 'wnxiezqnurlzma'
+    DB_USER_PWD = '2a0cb9582d0e2b35745b2329eb8b43f9c9640a35e808c7259f0d1f209f61b8bd'
+    DB_HOST = 'ec2-44-209-158-64.compute-1.amazonaws.com'
+    DB_NAME = 'dc82cgq9gcqga0'
     SQLALCHEMY_DATABASE_URI = 'postgresql://{username}:{password}@{host}/{db}'.format(
         username=DB_USER_NAME,
         password=DB_USER_PWD,
@@ -94,3 +107,6 @@ class ProductionConfig(Config):
         host=DB_HOST,
         db=DB_NAME
     )
+    print("\n----------DB_NAME--------------")
+    print(DB_NAME)
+    print("------------------------\n")
