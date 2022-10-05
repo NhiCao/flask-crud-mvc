@@ -38,6 +38,9 @@ class LocalConfig(Config):
         db=DB_NAME
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    print("\n----------DB_NAME - LocalConfig--------------")
+    print(DB_NAME)
+    print("------------------------\n")
 
 
 class GithubActionsConfig(Config):
@@ -52,6 +55,9 @@ class GithubActionsConfig(Config):
         db=DB_NAME
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    print("\n----------DB_NAME - GithubActionsConfig--------------")
+    print(DB_NAME)
+    print("------------------------\n")
 
 
 class DevelopmentConfig(Config):
@@ -65,7 +71,7 @@ class DevelopmentConfig(Config):
         host=DB_HOST,
         db=DB_NAME
     )
-    print("\n----------DB_NAME--------------")
+    print("\n----------DB_NAME - DevelopmentConfig--------------")
     print(DB_NAME)
     print("------------------------\n")
 
@@ -81,7 +87,7 @@ class StagingConfig(Config):
         host=DB_HOST,
         db=DB_NAME
     )
-    print("\n----------DB_NAME--------------")
+    print("\n----------DB_NAME - StagingConfig--------------")
     print(DB_NAME)
     print("------------------------\n")
 
@@ -97,6 +103,6 @@ class ProductionConfig(Config):
         host=DB_HOST,
         db=DB_NAME
     )
-    print("\n----------DB_NAME--------------")
+    print("\n----------DB_NAME - ProductionConfig--------------")
     print(DB_NAME)
     print("------------------------\n")
