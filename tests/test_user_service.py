@@ -9,6 +9,9 @@ from app import create_app, db
 class TestUser(unittest.TestCase):
     def setUp(self):
         environ = os.environ.get('FLASK_ENV')
+        print("\n----------environ--------------")
+        print(environ)
+        print("------------------------\n")
 
         config_app = config.LocalConfig
 

@@ -71,20 +71,10 @@ class DevelopmentConfig(Config):
 
 
 class StagingConfig(Config):
-    # DB_USER_NAME = 'lzsbhvfdiqzkyv'
-    # DB_USER_PWD = '9c517c53a9168b8c18eb857d5a16a52ebb3ebbedaa9e4fd03ba44fdb05cec147'
-    # DB_HOST = 'ec2-34-235-31-124.compute-1.amazonaws.com'
-    # DB_NAME = 'df9d8fakntg936'
-    # SQLALCHEMY_DATABASE_URI = 'postgresql://{username}:{password}@{host}/{db}'.format(
-    #     username=DB_USER_NAME,
-    #     password=DB_USER_PWD,
-    #     host=DB_HOST,
-    #     db=DB_NAME
-    # )
-    DB_USER_NAME = 'wnxiezqnurlzma'
-    DB_USER_PWD = '2a0cb9582d0e2b35745b2329eb8b43f9c9640a35e808c7259f0d1f209f61b8bd'
-    DB_HOST = 'ec2-44-209-158-64.compute-1.amazonaws.com'
-    DB_NAME = 'dc82cgq9gcqga0'
+    DB_USER_NAME = 'vgztlphygisgqv'
+    DB_USER_PWD = '36269bdd0c78a91514a73530d3743a8d207fe2802d1634aece0c8c8936263a5d'
+    DB_HOST = 'ec2-3-223-242-224.compute-1.amazonaws.com'
+    DB_NAME = 'd23f5l9pg54sf5'
     SQLALCHEMY_DATABASE_URI = 'postgresql://{username}:{password}@{host}/{db}'.format(
         username=DB_USER_NAME,
         password=DB_USER_PWD,
