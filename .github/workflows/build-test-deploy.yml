@@ -124,13 +124,11 @@ jobs:
     - name: Build Docker image
       run: |
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        echo $IMAGE_NAME
         docker build . -t $IMAGE_NAME
 
     - name: Push Docker image
       run: |
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        echo $IMAGE_NAME
         docker push $IMAGE_NAME
 
     - name: Deploy Docker image
@@ -138,4 +136,5 @@ jobs:
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
         echo $IMAGE_NAME
         GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-$FLASK_ENV"
-        gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
+        echo $GCP_SERVICE_NAME
+        # gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
