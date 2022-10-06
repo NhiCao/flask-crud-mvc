@@ -98,20 +98,23 @@ jobs:
         then
           echo "FLASK_ENV=DEVELOPMENT" >> $GITHUB_ENV
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_DEVELOPMENT }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_DEVELOPMENT }}"
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
           echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_STAGING }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_STAGING }}"
         elif [[ "$GITHUB_REF_NAME" == "master" ]]
         then
           echo "FLASK_ENV=PRODUCTION" >> $GITHUB_ENV
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_PRODUCTION }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_PRODUCTION }}"
         fi
     - name: Login
       uses: google-github-actions/setup-gcloud@v0
       with:
         # project_id: ${{ secrets.GCP_PROJECT_ID }}
-        project_id: $GCP_PROJECT
+        project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
         service_account_email: ${{ secrets.GCP_EMAIL }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
@@ -134,7 +137,5 @@ jobs:
     - name: Deploy Docker image
       run: |
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-        echo $IMAGE_NAME
         GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-$FLASK_ENV"
-        echo $GCP_SERVICE_NAME
         gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
