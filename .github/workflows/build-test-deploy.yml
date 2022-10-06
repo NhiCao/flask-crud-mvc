@@ -76,10 +76,14 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
-        # flask db init
-        # flask db migrate
-        # flask db upgrade
+        if [[ "$GITHUB_REF_NAME" == "feature/"* ]]
+        then
+          flask db init
+          flask db migrate
+          flask db upgrade
+        fi
         python -m unittest tests/test_user_service.py
+
 
   # deploy:
   #   if: github.ref_name == 'develop' || github.ref_name == 'staging' || github.ref_name == 'master'
