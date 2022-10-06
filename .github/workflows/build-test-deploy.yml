@@ -84,7 +84,6 @@ jobs:
         fi
         python -m unittest tests/test_user_service.py
 
-
   deploy:
     if: github.ref_name == 'develop' || github.ref_name == 'staging' || github.ref_name == 'master'
     runs-on: ubuntu-latest
@@ -111,7 +110,8 @@ jobs:
     - name: Login
       uses: google-github-actions/setup-gcloud@v0
       with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        # project_id: ${{ secrets.GCP_PROJECT_ID }}
+        project_id: $GCP_PROJECT
         service_account_email: ${{ secrets.GCP_EMAIL }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
@@ -137,4 +137,4 @@ jobs:
         echo $IMAGE_NAME
         GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-$FLASK_ENV"
         echo $GCP_SERVICE_NAME
-        gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=DEVELOPMENT"
+        gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
