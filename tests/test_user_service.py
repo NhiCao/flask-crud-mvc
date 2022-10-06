@@ -1,10 +1,14 @@
 import unittest
 import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import config
 
 from app.models.user import User
 from app.services import user_service
 from app import create_app, db
+
+
 
 class TestUser(unittest.TestCase):
     def setUp(self):
@@ -12,6 +16,9 @@ class TestUser(unittest.TestCase):
         print("\n----------environ--------------")
         print(environ)
         print("------------------------\n")
+
+        for path in sys.path:
+            print(path)
 
         config_app = config.LocalConfig
 
