@@ -89,7 +89,7 @@ jobs:
 
           echo "GCP EMAIL okkkkkkkkkkkkkkk"
 
-          echo "::set-output name=GCP_CREDENTIALS::${{ toJSON(secrets.GCP_CREDENTIALS_DEV) }}"
+          echo "::set-output name=GCP_CREDENTIALS::${{ fromJSON(secrets.GCP_CREDENTIALS_DEV) }}"
 
           echo "GCP CREDENTIALS okkkkkkkkkkkkkkk"
 
