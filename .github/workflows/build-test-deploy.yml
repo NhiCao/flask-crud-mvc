@@ -9,11 +9,6 @@ on:
       - 'master'
   # pull_request:
   #   branches: [master]
-
-# env:
-#   GAR_HOSTNAME: us-central1-docker.pkg.dev
-#   GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
-#   GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
   # nhi
 
 jobs:
@@ -21,7 +16,6 @@ jobs:
     if: startsWith(github.ref_name, 'feature/') || github.ref_name == 'develop' || github.ref_name == 'staging'
     runs-on: ubuntu-latest
     env:
-      # FLASK_ENV: LOCAL
       FLASK_APP: main.py
     services:
       postgres:
@@ -44,19 +38,13 @@ jobs:
       run: |
         if [[ "$GITHUB_REF_NAME" == "feature/"* ]]
         then
-          # echo "::set-output name=environment::LOCAL"
           echo "FLASK_ENV=LOCAL" >> $GITHUB_ENV
-          echo "Hi $FLASK_ENV"
         elif [[ "$GITHUB_REF_NAME" == "develop" ]]
         then
-          # echo "::set-output name=environment::DEVELOPMENT"
           echo "FLASK_ENV=DEVELOPMENT" >> $GITHUB_ENV
-          echo "Hi $FLASK_ENV"
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
-          # echo "::set-output name=environment::STAGING"
           echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
-          echo "Hi $FLASK_ENV"
         fi
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -87,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GAR_HOSTNAME: us-central1-docker.pkg.dev
-      GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
+      # GAR_REPOSITORY: ${{ secrets.GCP_APP_NAME }}
     steps:
     - name: check-environment
       id: check_env
@@ -95,18 +83,33 @@ jobs:
         if [[ "$GITHUB_REF_NAME" == "develop" ]]
         then
           echo "FLASK_ENV=DEVELOPMENT" >> $GITHUB_ENV
-          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_DEVELOPMENT }}" >> $GITHUB_ENV
-          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_DEVELOPMENT }}"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_DEV }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_DEV }}"
+          echo "GCP_EMAIL=${{ secrets.GCP_EMAIL_DEV }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_DEV }}"
+          echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_DEV }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
+          echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_DEV }}" >> $GITHUB_ENV
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
           echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
-          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_STAGING }}" >> $GITHUB_ENV
-          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_STAGING }}"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_STG }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_STG }}"
+          echo "GCP_EMAIL=${{ secrets.GCP_EMAIL_STG }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_STG }}"
+          echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_STG }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_STG }}"
+          echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_STG }}" >> $GITHUB_ENV
         elif [[ "$GITHUB_REF_NAME" == "master" ]]
         then
           echo "FLASK_ENV=PRODUCTION" >> $GITHUB_ENV
-          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_PRODUCTION }}" >> $GITHUB_ENV
-          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_PRODUCTION }}"
+          echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_PROD }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_PROD }}"
+          echo "GCP_EMAIL=${{ secrets.GCP_EMAIL_PROD }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_PROD }}"
+          echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_PROD }}" >> $GITHUB_ENV
+          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_PROD }}"
+          echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_PROD }}" >> $GITHUB_ENV
         fi
     - name: Login
       uses: google-github-actions/setup-gcloud@v0
