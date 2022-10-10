@@ -102,9 +102,7 @@ jobs:
           echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_STG }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_STG }}"
-          echo "GCP_EMAIL=${{ secrets.GCP_EMAIL_STG }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_STG }}"
-          echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_STG }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_STG }}"
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_STG }}" >> $GITHUB_ENV
         elif [[ "$GITHUB_REF_NAME" == "master" ]]
@@ -112,38 +110,36 @@ jobs:
           echo "FLASK_ENV=PRODUCTION" >> $GITHUB_ENV
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_PROD }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_PROD }}"
-          echo "GCP_EMAIL=${{ secrets.GCP_EMAIL_PROD }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_PROD }}"
-          echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_PROD }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_PROD }}"
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_PROD }}" >> $GITHUB_ENV
         fi
-    # - name: Login
-    #   uses: google-github-actions/setup-gcloud@v0
-    #   with:
-    #     # project_id: ${{ secrets.GCP_PROJECT_ID }}
-    #     project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
-    #     service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
-    #     service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS }}
+    - name: Login
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        # project_id: ${{ secrets.GCP_PROJECT_ID }}
+        project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
+        service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
+        service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS }}
 
-    # - name: Configure Docker
-    #   run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
+    - name: Configure Docker
+      run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
 
-    # - name: Checkout repository
-    #   uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    # - name: Build Docker image
-    #   run: |
-    #     IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-    #     docker build . -t $IMAGE_NAME
+    - name: Build Docker image
+      run: |
+        IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+        docker build . -t $IMAGE_NAME
 
-    # - name: Push Docker image
-    #   run: |
-    #     IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-    #     docker push $IMAGE_NAME
+    - name: Push Docker image
+      run: |
+        IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+        docker push $IMAGE_NAME
 
-    # - name: Deploy Docker image
-    #   run: |
-    #     IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
-    #     GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-${FLASK_ENV,,}"
-    #     gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
+    - name: Deploy Docker image
+      run: |
+        IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+        GCP_SERVICE_NAME="${{ secrets.GCP_APP_NAME }}-${FLASK_ENV,,}"
+        gcloud run deploy $GCP_SERVICE_NAME --image $IMAGE_NAME --region us-central1 --platform managed --allow-unauthenticated --set-env-vars "FLASK_ENV=$FLASK_ENV"
