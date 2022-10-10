@@ -89,7 +89,7 @@ jobs:
 
           echo "GCP EMAIL okkkkkkkkkkkkkkk"
 
-          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
+          echo "::set-output name=GCP_CREDENTIALS::${{ toJSON(secrets.GCP_CREDENTIALS_DEV) }}"
 
           echo "GCP CREDENTIALS okkkkkkkkkkkkkkk"
 
@@ -120,8 +120,8 @@ jobs:
         # project_id: ${{ secrets.GCP_PROJECT_ID }}
         project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
         service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
-        # service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS }}
-        service_account_key: ${{ secrets.GCP_CREDENTIALS_DEV }}
+        service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS }}
+        # service_account_key: ${{ secrets.GCP_CREDENTIALS_DEV }}
 
     - name: Configure Docker
       run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
