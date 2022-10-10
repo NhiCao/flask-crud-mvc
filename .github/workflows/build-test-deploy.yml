@@ -96,6 +96,9 @@ jobs:
           echo "GCP_CREDENTIALS okkkkkkkkkkkkkkk"
 
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_DEV }}" >> $GITHUB_ENV
+
+          echo "GAR_REPOSITORY okkkkkkkkkkkkkkk"
+
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
           echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
