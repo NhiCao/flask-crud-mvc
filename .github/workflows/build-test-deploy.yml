@@ -90,8 +90,8 @@ jobs:
 
           echo "GCP_EMAIL okkkkkkkkkkkkkkk"
 
-          echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_DEV }}" >> $GITHUB_ENV
-          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
+          # echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_DEV }}" >> $GITHUB_ENV
+          # echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
 
           echo "GCP_CREDENTIALS okkkkkkkkkkkkkkk"
 
