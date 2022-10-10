@@ -109,7 +109,7 @@ jobs:
       with:
         project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
         service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
-        service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS_DEV }}
+        service_account_key: ${{ secrets.GCP_CREDENTIALS_DEV }}
 
     - name: Login on staging environment
       if: github.ref_name == 'staging'
@@ -117,7 +117,7 @@ jobs:
       with:
         project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
         service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
-        service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS_STG }}
+        service_account_key: ${{ secrets.GCP_CREDENTIALS_STG }}
 
     - name: Login on production environment
       if: github.ref_name == 'production'
@@ -125,7 +125,7 @@ jobs:
       with:
         project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
         service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
-        service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS_PROD }}
+        service_account_key: ${{ secrets.GCP_CREDENTIALS_PROD }}
 
     - name: Configure Docker
       run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
