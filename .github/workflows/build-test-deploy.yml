@@ -141,6 +141,7 @@ jobs:
     - name: Push Docker image
       run: |
         IMAGE_NAME="$GAR_HOSTNAME/$GCP_PROJECT/$GAR_REPOSITORY/$GAR_REPOSITORY:$GITHUB_SHA"
+        echo "___________$GAR_REPOSITORY_____________"
         docker push $IMAGE_NAME
 
     - name: Deploy Docker image
