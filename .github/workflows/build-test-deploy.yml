@@ -86,7 +86,6 @@ jobs:
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_DEV }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_DEV }}"
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_DEV }}"
-          # echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_DEV }}" >> $GITHUB_ENV
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
@@ -94,7 +93,6 @@ jobs:
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_STG }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_STG }}"
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_STG }}"
-          # echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_STG }}"
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_STG }}" >> $GITHUB_ENV
         elif [[ "$GITHUB_REF_NAME" == "master" ]]
         then
@@ -102,7 +100,6 @@ jobs:
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_PROD }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_PROD }}"
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_PROD }}"
-          # echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_PROD }}"
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_PROD }}" >> $GITHUB_ENV
         fi
 
