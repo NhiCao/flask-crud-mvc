@@ -4,16 +4,20 @@ on:
   push:
     branches:
       - 'feature/**'
+  pull_request:
+    types:
+      - closed
+    branches:
       - 'develop'
       - 'staging'
       - 'master'
   # pull_request:
   #   branches: [master]
-  # nhi
+  # nhi1
 
 jobs:
   build-test:
-    if: startsWith(github.ref_name, 'feature/') || github.ref_name == 'develop' || github.ref_name == 'staging'
+    if: startsWith(github.ref_name, 'feature/') || (github.ref_name == 'develop' && github.event.pull_request.merged == true) || (github.ref_name == 'staging' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     env:
       FLASK_APP: main.py
@@ -71,7 +75,7 @@ jobs:
         python -m unittest tests/test_user_service.py
 
   deploy:
-    if: github.ref_name == 'develop' || github.ref_name == 'staging' || github.ref_name == 'master'
+    if: (github.ref_name == 'develop' && github.event.pull_request.merged == true) || (github.ref_name == 'staging' && github.event.pull_request.merged == true) || (github.ref_name == 'master' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     env:
       GAR_HOSTNAME: us-central1-docker.pkg.dev
