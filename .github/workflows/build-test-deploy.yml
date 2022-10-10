@@ -85,19 +85,17 @@ jobs:
           echo "FLASK_ENV=DEVELOPMENT" >> $GITHUB_ENV
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_DEV }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_DEV }}"
-          echo "GCP_EMAIL=${{ secrets.GCP_EMAIL_DEV }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_DEV }}"
 
-          echo "GCP_EMAIL okkkkkkkkkkkkkkk"
+          echo "GCP EMAIL okkkkkkkkkkkkkkk"
 
-          # echo "GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS_DEV }}" >> $GITHUB_ENV
-          # echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
+          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
 
-          echo "GCP_CREDENTIALS okkkkkkkkkkkkkkk"
+          echo "GCP CREDENTIALS okkkkkkkkkkkkkkk"
 
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_DEV }}" >> $GITHUB_ENV
 
-          echo "GAR_REPOSITORY okkkkkkkkkkkkkkk"
+          echo "GAR REPOSITORY okkkkkkkkkkkkkkk"
 
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
