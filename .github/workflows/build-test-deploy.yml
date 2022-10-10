@@ -111,9 +111,14 @@ jobs:
         # project_id: ${{ secrets.GCP_PROJECT_ID }}
         project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
         service_account_email: ${{ steps.check_env.outputs.GCP_EMAIL }}
-        service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS }}
-        # service_account_key: ${{ secrets.GCP_CREDENTIALS_DEV }}
+        # service_account_key: ${{ steps.check_env.outputs.GCP_CREDENTIALS }}
 
+        if: github.ref_name == 'develop'
+          service_account_key: ${{ secrets.GCP_CREDENTIALS_DEV }}
+        if: github.ref_name == 'staging'
+          service_account_key: ${{ secrets.GCP_CREDENTIALS_STG }}
+        if: github.ref_name == 'production'
+          service_account_key: ${{ secrets.GCP_CREDENTIALS_PROD }}
     - name: Configure Docker
       run: gcloud auth configure-docker "$GAR_HOSTNAME" --quiet
 
