@@ -116,7 +116,7 @@ jobs:
         service_account_key: ${{ secrets.GCP_CREDENTIALS_STG }}
 
     - name: Login on production environment
-      if: github.ref_name == 'production'
+      if: github.ref_name == 'master'
       uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ${{ steps.check_env.outputs.GCP_PROJECT }}
