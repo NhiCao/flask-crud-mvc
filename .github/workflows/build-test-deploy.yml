@@ -86,17 +86,8 @@ jobs:
           echo "GCP_PROJECT=${{ secrets.GCP_PROJECT_ID_DEV }}" >> $GITHUB_ENV
           echo "::set-output name=GCP_PROJECT::${{ secrets.GCP_PROJECT_ID_DEV }}"
           echo "::set-output name=GCP_EMAIL::${{ secrets.GCP_EMAIL_DEV }}"
-
-          echo "GCP EMAIL okkkkkkkkkkkkkkk"
-
-          echo "::set-output name=GCP_CREDENTIALS::${{ fromJSON(secrets.GCP_CREDENTIALS_DEV) }}"
-
-          echo "GCP CREDENTIALS okkkkkkkkkkkkkkk"
-
+          echo "::set-output name=GCP_CREDENTIALS::${{ secrets.GCP_CREDENTIALS_DEV }}"
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_DEV }}" >> $GITHUB_ENV
-
-          echo "GAR REPOSITORY okkkkkkkkkkkkkkk"
-
         elif [[ "$GITHUB_REF_NAME" == "staging" ]]
         then
           echo "FLASK_ENV=STAGING" >> $GITHUB_ENV
