@@ -103,7 +103,7 @@ jobs:
           echo "GAR_REPOSITORY=${{ secrets.GAR_REPOSITORY_PROD }}" >> $GITHUB_ENV
         fi
 
-    - name: Login on development environment
+    - name: Set up gcloud for development environment
       if: github.ref_name == 'develop'
       uses: google-github-actions/setup-gcloud@v0
       with:
@@ -111,7 +111,7 @@ jobs:
         service_account_email: ${{ secrets.GCP_EMAIL_DEV }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS_DEV }}
 
-    - name: Login on staging environment
+    - name: Set up gcloud for staging environment
       if: github.ref_name == 'staging'
       uses: google-github-actions/setup-gcloud@v0
       with:
@@ -119,7 +119,7 @@ jobs:
         service_account_email: ${{ secrets.GCP_EMAIL_STG }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS_STG }}
 
-    - name: Login on production environment
+    - name: Set up gcloud for production environment
       if: github.ref_name == 'master'
       uses: google-github-actions/setup-gcloud@v0
       with:

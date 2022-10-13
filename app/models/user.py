@@ -10,4 +10,4 @@ class User(db.Model):
     address = db.Column(db.String(120))
 
     def __repr__(self):
-        return '{name} - {age} - {address}'.format(name = self.name, age = self.age, address = self.address)
+        return '{id} - {name} - {age} - {address}'.format(id = self.id, name = self.name, age = self.age, address = self.address)
